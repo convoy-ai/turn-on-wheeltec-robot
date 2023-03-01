@@ -1,5 +1,8 @@
 
 <launch>
+
+  <arg name="namespace" default="" />
+
   <arg name="mapping_mode"  default="gmapping" doc="opt: gmapping,hector,cartographer,karto"/>
   
   <!-- 是否在建图时开启导航 默认不开启 仅在rrt自主建图时同时进行-->
@@ -7,7 +10,9 @@
   <arg name="odom_frame_id"  default="odom_combined"/>
 
   <!-- turn on lidar开启雷达  -->
-  <include file="$(find turn_on_wheeltec_robot)/launch/wheeltec_lidar.launch" />
+  <include file="$(find turn_on_wheeltec_robot)/launch/wheeltec_lidar.launch" >
+    <arg name="namespace" value="$(arg namespace) />
+  </include>
 
   <!-- 启动APP一键保存地图功能  -->
   <node pkg="world_canvas_msgs" type="save" name="save_map" />
@@ -20,6 +25,7 @@
     <arg name="navigation" value="$(arg navigation)"/>
     <arg name="is_cartographer" value="false"/>
     <arg name="odom_frame_id"   value="$(arg odom_frame_id)"/>
+    <arg name="namespace" value="$(arg namespace)" />
   </include>
   </group>
 

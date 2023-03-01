@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- laser -->
+
+  <joint name="$(arg namespace)/laser_joint" type="fixed">
+    <origin xyz="0.03 0.00 0.18" rpy="0 0 0" />
+    <parent link="$(arg namespace)/base_link" />
+    <child link="$(arg namespace)/laser_link" />
+  </joint>
+
+  <link name="$(arg namespace)/laser_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.02" />
+      </geometry>
+      <material name="red" />
+    </visual>
+  </link>
+
+  <gazebo reference="$(arg namespace)/laser_link">
+    <material>Gazebo/Red</material>
+
+    <sensor name="laser" type="ray">
+
+      <pose>0 0 0 0 0 0</pose>
+
+      <visualize>false</visualize>
+
+      <update_rate>10</update_rate>
+
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+
+        <range>
+          <min>0.05</min>
+          <max>12</max>
+          <resolution>0.005</resolution>
+        </range>
+
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.001</stddev>
+        </noise>
+      </ray>
+
+      <plugin name="$(arg namespace)/laser" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>$(arg namespace)/laser_link</frameName>
+      </plugin>
+
+    </sensor>
+  </gazebo>
+
+  <!-- gyro -->
+
+  <joint name="$(arg namespace)/gyro_joint" type="fixed">
+    <origin xyz="-0.04 0.00 0.14" rpy="0 0 0" />
+    <parent link="$(arg namespace)/base_link" />
+    <child link="$(arg namespace)/gyro_link" />
+  </joint>
+
+  <link name="$(arg namespace)/gyro_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.04 0.03 0.015" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+
+  <gazebo reference="$(arg namespace)/gyro_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>
