@@ -11,7 +11,7 @@
 
   <!-- turn on lidar开启雷达  -->
   <include file="$(find turn_on_wheeltec_robot)/launch/wheeltec_lidar.launch" >
-    <arg name="namespace" value="$(arg namespace) />
+    <arg name="namespace" value="$(arg namespace)" />
   </include>
 
   <!-- 启动APP一键保存地图功能  -->
@@ -19,7 +19,10 @@
 
   <!-- 开启gmapping建图算法  -->
   <group if="$(eval mapping_mode == 'gmapping')">
-  <include file="$(find turn_on_wheeltec_robot)/launch/include/algorithm_gmapping.launch" />
+  <include file="$(find turn_on_wheeltec_robot)/launch/include/algorithm_gmapping.launch">
+    <arg name="base_frame" value="$(arg namespace)/base_link" />
+    <arg name="odom_frame" value="$(arg namespace)/odom_combined" />
+  </include>
   <!-- 开启机器人底层相关节点  -->
   <include file="$(find turn_on_wheeltec_robot)/launch/turn_on_wheeltec_robot.launch">
     <arg name="navigation" value="$(arg navigation)"/>

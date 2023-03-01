@@ -48,7 +48,7 @@ obstacle_layer:
     #观测源的TF坐标名称，如果设置为空，会自动从话题数据寻找TF坐标名称
     #以下三种数据格式支持自动寻找TF坐标名称
     #sensor_msgs/LaserScan, sensor_msgs/PointCloud, and sensor_msgs/PointCloud2
-    sensor_frame: laser
+    # sensor_frame: laser
     #观测源话题的数据格式，可以为LaserScan、PointCloud、PointCloud2
     data_type: LaserScan
     #保留多久时间内的全部话题数据作为障碍层输入，设置为0代表只保留最近的一帧数据，单位：s

@@ -3,7 +3,7 @@
 #局部路径规划器DWAPlannerROS命名空间
 TebLocalPlannerROS:
   odom_topic: odom_combined #订阅的里程计话题
-  map_frame: map #代价地图的TF参考坐标系
+  # map_frame: map #代价地图的TF参考坐标系
 
   #机器人参数
   max_vel_x: 0.4 #最大x前向速度，单位：m/s
