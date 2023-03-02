@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="namespace" default="robot" />
+
+  <!-- statically transform from base_footprint to base_link -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_link" args="0 0 0 0 0 0 base_footprint base_link 100" /> -->
+
+  <!-- statically transform from base_footprint to laser -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.05 0.00 0.18 3.14 0 0 base_footprint laser 100" /> -->
+  <!-- statically transform from base_footprint to gyro -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_gyro" args="-0.04 0.00 0.14 0 0 0 base_footprint gyro_link 100" /> -->
+  
+  <param name="robot_description" command="xacro $(find turn_on_wheeltec_robot)/urdf/wheeltec/wheeltec.urdf.xacro namespace:=$(arg namespace)" />
+
+  <!-- read urdf information (robot_description) published topics：/joint_states-->
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
+  
+  <!-- subscribe to topic：/joint_states，to publish tf information-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="publish_frequency" value="1" />
+  </node>
+
+</launch>

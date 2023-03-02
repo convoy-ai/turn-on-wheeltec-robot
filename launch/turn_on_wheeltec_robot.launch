@@ -1,4 +1,7 @@
 <launch>
+
+  <arg name="namespace" default="" />
+
   <!-- Arguments参数 -->
   <arg name="car_mode"  default="mini_mec" 
        doc="opt: mini_akm,senior_akm,top_akm_bs,top_akm_dl,
@@ -23,7 +26,7 @@
   
   <!-- turn on base_serial 开启底层单片机的控制节点  -->
   <include file="$(find turn_on_wheeltec_robot)/launch/include/base_serial.launch" unless="$(arg repeat)">
-    <arg name="odom_frame_id"  value="$(arg odom_frame_id)"/>
+    <arg name="namespace" value="$(arg namespace)" />
   </include>
    
 
@@ -34,6 +37,7 @@
   <!-- 开启dwa_local_planner导航算法-->
   <!-- <include file="$(find turn_on_wheeltec_robot)/launch/include/dwa_local_planner.launch" if="$(arg navigation)"> -->
     <arg name="car_mode" value="$(arg car_mode)"/>
+    <arg name="namespace" value="$(arg namespace)" />
   </include>
 
   <!--当开启纯视觉导航功能时-->
@@ -45,13 +49,14 @@
   </include>
 
   <!-- 发布用于建图、导航的TF关系与小车外形可视化 -->
-  <include file="$(find turn_on_wheeltec_robot)/launch/robot_model_visualization.launch" unless="$(arg repeat)">
-    <arg name="car_mode" value="$(arg car_mode)"/>
+  <include file="$(find turn_on_wheeltec_robot)/launch/robot_viz_wheeltec.launch" unless="$(arg repeat)">
+    <arg name="namespace" value="$(arg namespace)"/>
   </include>
 
   <!-- 扩张卡尔曼滤波 发布odom_combined到footprint的TF,即小车定位 使用cartographer算法时不使用该滤波算法-->
   <include file="$(find turn_on_wheeltec_robot)/launch/include/robot_pose_ekf.launch" unless="$(arg repeat)">
     <arg name="is_cartographer" value="$(arg is_cartographer)"/>
+   <arg name="namespace" value="$(arg namespace)" />
   </include>
  </launch>
 

@@ -2,13 +2,13 @@
 
 #局部路径规划器DWAPlannerROS命名空间
 TebLocalPlannerROS:
-  odom_topic: odom #订阅的里程计话题
-  map_frame: map #代价地图的TF参考坐标系
+  # odom_topic: odom_combined #订阅的里程计话题
+  # map_frame: map #代价地图的TF参考坐标系
 
   #机器人参数
-  max_vel_x: 0.5 #最大x前向速度，单位：m/s
+  max_vel_x: 0.4 #最大x前向速度，单位：m/s
   max_vel_y: 0.3 #最大y前向速度，单位：m/s，非全向移动小车需要设置为0
-  max_vel_x_backwards: 0.5 #最大后退速度，单位：m/s
+  max_vel_x_backwards: 0.4 #最大后退速度，单位：m/s
   max_vel_theta: 1.5  #最大转向角速度，单位：rad/s
   acc_lim_x: 0.2  #最大x向加速度，单位：m/s^2
   acc_lim_y: 0.2  #最大y向加速度，，单位：m/s^2,非全向移动小车需要设置为0
@@ -45,7 +45,7 @@ TebLocalPlannerROS:
     vertices: [[-0.133, -0.125],[-0.133, 0.125],[0.133,0.125],[0.133, -0.125]] #多边形端点坐标 for mini_mec
 
   #障碍物参数
-  min_obstacle_dist: 0.1 #和障碍物最小距离，直接影响机器人避障效果
+  min_obstacle_dist: 0.12 #和障碍物最小距离，直接影响机器人避障效果
   include_costmap_obstacles: True #是否将动态障碍物预测为速度模型，
   costmap_obstacles_behind_robot_dist: 1.5 #限制机器人后方规划时考虑的局部成本地图障碍物
   obstacle_poses_affected: 15  #障碍物姿态受影响0~30
@@ -54,10 +54,11 @@ TebLocalPlannerROS:
   costmap_converter_rate: 5
   include_dynamic_obstacles: True 
   dynamic_obstacle_inflation_dist: 0.6
+  inflation_dist: 0.12
 
   #目标点误差允许值
-  xy_goal_tolerance: 0.2  #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点，单位为：m
-  yaw_goal_tolerance: 0.1 #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点单位为：rad
+  xy_goal_tolerance: 0.25  #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点，单位为：m
+  yaw_goal_tolerance: 1 #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点单位为：rad
   free_goal_vel: False    #允许机器人以最大速度驶向目的地
 
   #轨道配置参数
@@ -79,7 +80,7 @@ TebLocalPlannerROS:
   weight_max_vel_theta: 1
   weight_acc_lim_x: 1
   weight_acc_lim_theta: 1
-  weight_kinematics_nh: 1000
+  weight_kinematics_nh: 10
   weight_kinematics_forward_drive: 1
   weight_kinematics_turning_radius: 1
   weight_optimaltime: 1 #必须大于0

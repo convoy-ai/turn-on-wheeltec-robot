@@ -1,0 +1,12 @@
+<launch>
+
+<arg name="namespace" default="robot" />
+
+<group ns="$(arg namespace)">
+  <include file="$(find turn_on_wheeltec_robot)/launch/mapping.launch" >
+    <arg name="navigation"  value="true"/>
+    <arg name="namespace" value="$(arg namespace)" />
+  </include>
+</group>
+
+</launch>
