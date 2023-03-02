@@ -3,9 +3,8 @@
 <arg name="namespace" default="robot" />
 
 <group ns="$(arg namespace)">
-  <!-- <include file="$(find turn_on_wheeltec_robot)/launch/mapping.launch" > -->
-  <include file="$(find turn_on_wheeltec_robot)/launch/turn_on_wheeltec_robot.launch" >
-    <arg name="navigation"  value="false"/>
+  <include file="$(find turn_on_wheeltec_robot)/launch/mapping.launch" >
+    <arg name="navigation"  value="true"/>
     <arg name="namespace" value="$(arg namespace)" />
   </include>
 </group>

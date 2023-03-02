@@ -37,6 +37,7 @@
   <!-- 开启dwa_local_planner导航算法-->
   <!-- <include file="$(find turn_on_wheeltec_robot)/launch/include/dwa_local_planner.launch" if="$(arg navigation)"> -->
     <arg name="car_mode" value="$(arg car_mode)"/>
+    <arg name="namespace" value="$(arg namespace)" />
   </include>
 
   <!--当开启纯视觉导航功能时-->
